@@ -1,8 +1,11 @@
+import Navbar from "./components/Navbar.tsx";
 
 const App = () => {
-    return (
-        <div className={"text-2xl"}>App</div>
-    )
-}
+  return (
+    <main>
+      <Navbar />
+    </main>
+  );
+};
 
-export default App
+export default App;

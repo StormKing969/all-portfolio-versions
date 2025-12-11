@@ -1,25 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [tailwindcss(), react()],
-  resolve: {
-    alias: {
-      "@components": resolve(
-        dirname(fileURLToPath(import.meta.url)),
-        "components",
-      ),
-      "@constants": resolve(
-        dirname(fileURLToPath(import.meta.url)),
-        "constants",
-      ),
-      "@store": resolve(dirname(fileURLToPath(import.meta.url)), "store"),
-      "@hoc": resolve(dirname(fileURLToPath(import.meta.url)), "hoc"),
-      "@windows": resolve(dirname(fileURLToPath(import.meta.url)), "windows"),
-    },
-  },
 });
