@@ -8,6 +8,7 @@ const FONT_WEIGHTS = {
   subtitle: { min: 100, max: 400, default: 100 },
   title: { min: 400, max: 900, default: 400 },
 };
+const HOVER_SPREAD = 2000;
 
 const renderText = (text: string, className: string, baseWeight = 400) => {
   return [...text].map((char, i) => (
@@ -52,7 +53,7 @@ const setupTextHover = (
     letters.forEach((letter) => {
       const { left: l, width: w } = letter.getBoundingClientRect();
       const distance = Math.abs(mouseX - (l - left + w / 2));
-      const intensity = Math.exp(-(distance ** 2) / 2000);
+      const intensity = Math.exp(-(distance ** 2) / HOVER_SPREAD);
 
       animateLetters(letter, min + (max - min) * intensity);
     });
@@ -69,7 +70,7 @@ const setupTextHover = (
 
   return () => {
     container.removeEventListener("mousemove", handleMouseMove);
-    container.removeEventListener("mouseout", handleMouseLeave);
+    container.removeEventListener("mouseleave", handleMouseLeave);
   };
 };
 
@@ -78,6 +79,13 @@ const Welcome = () => {
   const subtitleRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (prefersReducedMotion) {
+      return;
+    }
+
     const titleCleanup = setupTextHover(titleRef.current, "title");
     const subtitleCleanup = setupTextHover(subtitleRef.current, "subtitle");
 
@@ -105,7 +113,10 @@ const Welcome = () => {
       </h1>
 
       <div className={"small-screen"}>
-        <p>This Portfolio is designed for desktop & tablet screens so far.</p>
+        <p>
+          This portfolio is optimized for screens 768px and wider. Please view
+          on a tablet or desktop for the best experience.
+        </p>
       </div>
     </section>
   );
