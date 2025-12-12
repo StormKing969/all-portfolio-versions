@@ -3,17 +3,15 @@ import { Tooltip } from "react-tooltip";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import { dockApps } from "../constants";
-import type { DockAppType } from "../types";
+import { dockApps } from "../constants/dockData.tsx";
+import useWindowStore from "../store/window.tsx";
+import type { WindowConfigType } from "../types";
 
 const HOVER_SPREAD = 2000;
 
 const Dock = () => {
+  const { openWindow, closeWindow, windows } = useWindowStore();
   const dockRef = useRef<HTMLDivElement>(null);
-
-  const toggleApp = (app: Pick<DockAppType, "id" | "canOpen">) => {
-    //TODO
-  };
 
   useGSAP(() => {
     const dock = dockRef.current;
@@ -66,6 +64,24 @@ const Dock = () => {
     };
   }, []);
 
+  const toggleApp = (app: { id: WindowConfigType; canOpen: boolean }) => {
+    if (!app.canOpen) {
+      return;
+    }
+
+    const win = windows[app.id];
+    if (!win) {
+      console.error(`Window ${app.id} not found.`);
+      return;
+    }
+
+    if (win.isOpen) {
+      closeWindow(app.id);
+    } else {
+      openWindow(app.id);
+    }
+  };
+
   return (
     <section id={"dock"}>
       <div ref={dockRef} className={"dock-container"}>
@@ -79,7 +95,9 @@ const Dock = () => {
               data-tooltip-content={name}
               data-tooltip-delay-show={150}
               disabled={!canOpen}
-              onClick={() => toggleApp({ id, canOpen })}
+              onClick={() =>
+                canOpen && toggleApp({ id: id as WindowConfigType, canOpen })
+              }
             >
               <img
                 src={`/images/${icon}`}

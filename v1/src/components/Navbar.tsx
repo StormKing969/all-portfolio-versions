@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 
-import { navIcons, navLinks } from "../constants";
 import type { NavIconType, NavLinkType } from "../types";
+import { navIcons, navLinks } from "../constants/navbarData.tsx";
 
 const Navbar = () => {
   return (
