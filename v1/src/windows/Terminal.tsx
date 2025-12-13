@@ -25,15 +25,15 @@ const Terminal = () => {
         </div>
 
         <ul className={"content"}>
-          {techStack.map(({ category, items }: TechStackType, index) => (
-            <li key={index} className={"flex items-center"}>
+          {techStack.map(({ category, items }: TechStackType) => (
+            <li key={category} className={"flex items-center"}>
               <Check className={"check"} size={20} />
               <h3>{category}</h3>
               <ul>
                 {items.map((item, index) => (
                   <li key={index}>
                     {item}
-                    {index < items.length - 1 ? "," : ""}
+                    {item !== items[items.length - 1] ? "," : ""}
                   </li>
                 ))}
               </ul>

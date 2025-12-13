@@ -46,3 +46,11 @@ export interface TechStackType {
   category: string;
   items: string[];
 }
+
+export interface BlogPostType {
+  id: number;
+  date: string;
+  title: string;
+  image: string;
+  link: string;
+}

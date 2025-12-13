@@ -11,6 +11,7 @@ const WindowControls = ({ target }: WindowControlsProps) => {
   return (
     <div id={"window-controls"}>
       <div className={"close"} onClick={() => closeWindow(target)} />
+      {/*TODO: Expand the current functionality*/}
       <div className={"minimize"} />
       <div className={"maximize"} />
     </div>
