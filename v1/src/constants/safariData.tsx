@@ -1,5 +1,7 @@
+import type { BlogPostType } from "../types";
+
 // TODO: Remove once the actual blogs are created
-export const blogPosts = [
+export const blogPosts: BlogPostType[] = [
   {
     id: 1,
     date: "Sep 2, 2025",
