@@ -41,3 +41,8 @@ export interface WindowStore {
   closeWindow: (windowKey: WindowConfigType) => void;
   focusWindow: (windowKey: WindowConfigType) => void;
 }
+
+export interface TechStackType {
+  category: string;
+  items: string[];
+}
