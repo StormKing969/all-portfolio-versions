@@ -19,7 +19,7 @@ export const techStack: TechStackType[] = [
   },
   {
     category: "Database",
-    items: ["MongoDB", "PostgresSQL", "Firebase", "MySQL"],
+    items: ["MongoDB", "PostgreSQL", "Firebase", "MySQL"],
   },
   {
     category: "Dev Tools",

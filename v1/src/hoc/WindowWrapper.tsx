@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Draggable } from "gsap/Draggable";
 
-import useWindowStore from "../store/window.tsx";
+import useWindowStore from "../store/window";
 import type { WindowConfigType } from "../types";
 
 type WindowWrapperProps<P> = P;
@@ -14,7 +14,13 @@ const WindowWrapper = <P extends object>(
 ) => {
   const Wrapped = (props: WindowWrapperProps<P>) => {
     const { focusWindow, windows } = useWindowStore();
-    const { isOpen, zIndex } = windows[windowKey];
+    const windowState = windows[windowKey];
+    if (!windowState) {
+      console.error(`Window configuration not found for key: ${windowKey}`);
+      return null;
+    }
+
+    const { isOpen, zIndex } = windowState;
     const ref = useRef<HTMLElement | null>(null);
 
     useGSAP(() => {
@@ -23,7 +29,6 @@ const WindowWrapper = <P extends object>(
         return;
       }
 
-      ele.style.display = "block";
       gsap.fromTo(
         ele,
         { scale: 0.8, opacity: 0, y: 40 },
