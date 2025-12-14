@@ -2,10 +2,10 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 import { INITIAL_Z_INDEX, WINDOW_CONFIG } from "../constants/windowData.tsx";
-import type { WindowConfigType, WindowStore } from "../types";
+import type { WindowConfigType, WindowStoreState } from "../types";
 
-const useWindowStore = create<WindowStore>()(
-  immer<WindowStore>((set) => ({
+const useWindowStore = create<WindowStoreState>()(
+  immer<WindowStoreState>((set) => ({
     windows: WINDOW_CONFIG,
     nextZIndex: INITIAL_Z_INDEX + 1,
 

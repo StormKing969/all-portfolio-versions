@@ -2,8 +2,11 @@ import dayjs from "dayjs";
 
 import type { NavIconType, NavLinkType } from "../types";
 import { navIcons, navLinks } from "../constants/navbarData.tsx";
+import useWindowStore from "../store/window.tsx";
 
 const Navbar = () => {
+  const { openWindow } = useWindowStore();
+
   return (
     <nav>
       <div>
@@ -11,8 +14,8 @@ const Navbar = () => {
         <p className={"font-bold"}>Sajana's Portfolio</p>
 
         <ul>
-          {navLinks.map(({ id, name }: NavLinkType) => (
-            <li key={id}>
+          {navLinks.map(({ id, name, type }: NavLinkType) => (
+            <li key={id} onClick={() => openWindow(type)}>
               <p>{name}</p>
             </li>
           ))}
