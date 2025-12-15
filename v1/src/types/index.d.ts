@@ -1,7 +1,7 @@
 export interface NavLinkType {
   id: number;
   name: string;
-  type: string;
+  type: WindowConfigType;
 }
 
 export interface NavIconType {
@@ -34,7 +34,7 @@ export interface WindowConfigDataType {
 
 export type WindowsState = Record<WindowConfigType, WindowConfigDataType>;
 
-export interface WindowStore {
+export interface WindowStoreState {
   windows: WindowsState;
   nextZIndex: number;
   openWindow: (windowKey: WindowConfigType, data?: unknown | null) => void;
@@ -53,4 +53,42 @@ export interface BlogPostType {
   title: string;
   image: string;
   link: string;
+}
+
+export interface FileDataType {
+  id: number;
+  name: string;
+  icon: string;
+  kind: "file";
+  fileType: "txt" | "url" | "img" | "fig" | "pdf";
+  position?: string;
+  subtitle?: string;
+  description?: string[];
+  href?: string;
+  imageUrl?: string;
+}
+
+export interface FolderDataType {
+  id: number;
+  name: string;
+  icon: string;
+  kind: "folder";
+  position: string;
+  windowPosition?: string;
+  children: Array<FileDataType | FolderDataType>;
+}
+
+export interface LocationDataType {
+  id: number;
+  type: string;
+  name: string;
+  icon: string;
+  kind: "folder";
+  children: Array<FolderDataType | FileDataType>;
+}
+
+export interface LocationStoreState {
+  activeLocation: LocationDataType | null;
+  setActiveLocation: (location: LocationDataType | FolderDataType) => void;
+  resetActiveLocation: () => void;
 }

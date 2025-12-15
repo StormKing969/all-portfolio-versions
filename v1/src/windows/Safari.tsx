@@ -1,5 +1,3 @@
-import { WindowControls } from "../components";
-import WindowWrapper from "../hoc/WindowWrapper.tsx";
 import {
   ChevronLeft,
   ChevronRight,
@@ -11,6 +9,9 @@ import {
   Share,
   ShieldHalf,
 } from "lucide-react";
+
+import { WindowControls } from "../components";
+import WindowWrapper from "../hoc/WindowWrapper.tsx";
 import { blogPosts } from "../constants/safariData.tsx";
 
 const Safari = () => {

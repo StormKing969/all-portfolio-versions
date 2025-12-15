@@ -1,9 +1,9 @@
 import { useLayoutEffect, useRef, type ComponentType } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Draggable } from "gsap/Draggable";
+import { Draggable } from "gsap/all";
 
-import useWindowStore from "../store/window";
+import useWindowStore from "../store/window.tsx";
 import type { WindowConfigType } from "../types";
 
 type WindowWrapperProps<P> = P;
