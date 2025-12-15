@@ -23,13 +23,17 @@ const Image = () => {
       <div className={"p-4 bg-white"}>
         {imageUrl ? (
           <div className={"w-full"}>
-              <img
-                  src={imageUrl}
-                  alt={name}
-                  className={"w-full h-auto object-cover rounded"}
-              />
+            <img
+              src={imageUrl}
+              alt={name}
+              className={"w-full h-auto object-cover rounded"}
+            />
           </div>
-        ) : null}
+        ) : (
+          <div className={"flex-center h-64 text-gray-400"}>
+            <p>No image available</p>
+          </div>
+        )}
       </div>
     </>
   );

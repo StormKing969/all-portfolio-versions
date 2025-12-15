@@ -13,7 +13,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 const Resume = () => {
-  const [numPages, setNumPages] = useState<number>(0);
+  const [numPages, setNumPages] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [error, setError] = useState<string | null>(null);
 
@@ -52,7 +52,7 @@ const Resume = () => {
           setError(error.message);
         }}
         loading={<div>Loading PDF...</div>}
-        error={<div>Error loading PDF: {error}</div>}
+        error={<div>Error loading PDF: {error || "Unknown error"}</div>}
       >
         <Page
           pageNumber={currentPage}
