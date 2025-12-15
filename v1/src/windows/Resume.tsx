@@ -13,8 +13,9 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 const Resume = () => {
-  const numPages = 2;
-  const [currentPage, setCurrentPage] = useState(1);
+  const [numPages, setNumPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [error, setError] = useState<string | null>(null);
 
   const handleCurrentPage = (direction: string) => {
     if (direction === "prev" && currentPage !== 1) {
@@ -42,7 +43,17 @@ const Resume = () => {
         </a>
       </div>
 
-      <Document file="/files/resume.pdf">
+      <Document
+        file="/files/resume.pdf"
+        onLoadSuccess={({ numPages }) => {
+          setNumPages(numPages);
+        }}
+        onLoadError={(error) => {
+          setError(error.message);
+        }}
+        loading={<div>Loading PDF...</div>}
+        error={<div>Error loading PDF: {error}</div>}
+      >
         <Page
           pageNumber={currentPage}
           renderTextLayer={true}

@@ -16,7 +16,7 @@ const Finder = () => {
   const { openWindow } = useWindowStore();
   const { activeLocation, setActiveLocation } = useLocationStore();
 
-  const renderList = (name: string, items: any[]) => (
+  const renderList = (name: string, items: Array<LocationDataType | FolderDataType | FileDataType>) => (
     <div>
       <h3>{name}</h3>
       <ul>
@@ -46,19 +46,25 @@ const Finder = () => {
       return;
     }
 
-    if ("fileType" in item && item.fileType === "pdf") {
-      return openWindow("resume");
-    }
-
     if (item.kind === "folder") {
       return setActiveLocation(item);
+    }
+
+    if ("fileType" in item && item.fileType === "pdf") {
+      return openWindow("resume");
     }
 
     if (["fig", "url"].includes(item.fileType) && item.href) {
       return window.open(item.href, "_blank");
     }
 
-    // openWindow(`${item.fileType}${item.kind}`, item);
+    if ("fileType" in item && item.fileType === "txt") {
+      return openWindow("txt_file", item);
+    }
+
+    if ("fileType" in item && item.fileType === "img") {
+      return openWindow("img_file", item);
+    }
   };
 
   return (
