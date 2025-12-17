@@ -13,7 +13,7 @@ const WORK_LOCATION: LocationDataType = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-5", // icon position inside Finder
-      windowPosition: "top-[5vh] left-5", // optional: Finder window position
+      windowPosition: "top-[50vh] left-5", // optional: Finder window position
       children: [
         {
           id: 1,

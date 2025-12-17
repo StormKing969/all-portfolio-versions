@@ -1,7 +1,8 @@
 import gsap from "gsap";
 import { Draggable } from "gsap/all";
+import { useGSAP } from "@gsap/react";
 
-import { Dock, Navbar, Welcome } from "./components";
+import { Dock, Home, Navbar, Welcome } from "./components";
 import {
   Finder,
   Resume,
@@ -12,7 +13,7 @@ import {
   Contact,
 } from "./windows";
 
-gsap.registerPlugin(Draggable);
+gsap.registerPlugin(Draggable, useGSAP);
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
       <Text />
       <Image />
       <Contact />
+      <Home />
     </main>
   );
 };

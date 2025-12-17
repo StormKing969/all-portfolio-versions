@@ -88,7 +88,7 @@ export interface LocationDataType {
 }
 
 export interface LocationStoreState {
-  activeLocation: LocationDataType | null;
+  activeLocation: LocationDataType | FolderDataType | FileDataType;
   setActiveLocation: (location: LocationDataType | FolderDataType | FileDataType) => void;
   resetActiveLocation: () => void;
 }
