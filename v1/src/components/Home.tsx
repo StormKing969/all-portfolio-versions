@@ -3,25 +3,32 @@ import clsx from "clsx";
 import { useGSAP } from "@gsap/react";
 import { Draggable } from "gsap/all";
 import useWindowStore from "../store/window.tsx";
-import type { FolderDataType, FileDataType } from "../types";
+import type { FolderDataType } from "../types";
 import useLocationStore from "../store/location.tsx";
 
 // Ensure only folders are treated as projects so we can safely access windowPosition
-const projects = (locations.work?.children.filter(
-  (item) => item.kind === "folder",
-) as FolderDataType[]) ?? [];
+const projects =
+  (locations.work?.children.filter(
+    (item) => item.kind === "folder",
+  ) as FolderDataType[]) ?? [];
 
 const Home = () => {
   const { setActiveLocation } = useLocationStore();
   const { openWindow } = useWindowStore();
 
-  const handleOpenProjectFinder = (project: FolderDataType | FileDataType) => {
+  const handleOpenProjectFinder = (project: FolderDataType) => {
     setActiveLocation(project);
     openWindow("finder");
   };
 
   useGSAP(() => {
-    Draggable.create(".folder");
+    const draggableList = Draggable.create(".folder");
+
+    return () => {
+      draggableList.forEach((draggable) => {
+        draggable.kill();
+      });
+    };
   }, []);
 
   return (

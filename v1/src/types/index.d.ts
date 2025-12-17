@@ -89,6 +89,16 @@ export interface LocationDataType {
 
 export interface LocationStoreState {
   activeLocation: LocationDataType | FolderDataType | FileDataType;
-  setActiveLocation: (location: LocationDataType | FolderDataType | FileDataType) => void;
+  setActiveLocation: (
+    location: LocationDataType | FolderDataType | FileDataType,
+  ) => void;
   resetActiveLocation: () => void;
+}
+
+export interface SocialType {
+  id: number;
+  text: string;
+  icon: string;
+  bg: string;
+  link: string;
 }

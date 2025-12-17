@@ -30,6 +30,7 @@ const Contact = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 title={text}
+                aria-label={`Visit ${text}`}
               >
                 <img src={icon} alt={text} className={"size-5"} />
                 <p>{text}</p>

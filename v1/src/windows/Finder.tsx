@@ -93,7 +93,7 @@ const Finder = () => {
                   <p>{item.name}</p>
                 </li>
               ))
-            : ""}
+            : null}
         </ul>
       </div>
     </>

@@ -1,5 +1,7 @@
 // TODO: Change the information
-export const socials = [
+import type { SocialType } from "../types";
+
+export const socials: SocialType[] = [
   {
     id: 1,
     text: "Github",
