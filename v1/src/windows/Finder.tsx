@@ -6,17 +6,16 @@ import { WindowControls } from "../components";
 import { locations } from "../constants/finderData.tsx";
 import useLocationStore from "../store/location.tsx";
 import useWindowStore from "../store/window.tsx";
-import type {
-  LocationDataType,
-  FolderDataType,
-  FileDataType,
-} from "../types";
+import type { LocationDataType, FolderDataType, FileDataType } from "../types";
 
 const Finder = () => {
   const { openWindow } = useWindowStore();
   const { activeLocation, setActiveLocation } = useLocationStore();
 
-  const renderList = (name: string, items: Array<LocationDataType | FolderDataType | FileDataType>) => (
+  const renderList = (
+    name: string,
+    items: Array<LocationDataType | FolderDataType | FileDataType>,
+  ) => (
     <div>
       <h3>{name}</h3>
       <ul>
@@ -66,22 +65,6 @@ const Finder = () => {
           break;
       }
     }
-
-    // if ("fileType" in item && item.fileType === "pdf") {
-    //   return openWindow("resume");
-    // }
-    //
-    // if (["fig", "url"].includes(item.fileType) && item.href) {
-    //   return window.open(item.href, "_blank");
-    // }
-    //
-    // if ("fileType" in item && item.fileType === "txt") {
-    //   return openWindow("txt_file", item);
-    // }
-    //
-    // if ("fileType" in item && item.fileType === "img") {
-    //   return openWindow("img_file", item);
-    // }
   };
 
   return (
@@ -99,16 +82,18 @@ const Finder = () => {
         </div>
 
         <ul className={"content"}>
-          {activeLocation?.children.map((item) => (
-            <li
-              key={item.id}
-              className={item.position}
-              onClick={() => openItem(item)}
-            >
-              <img src={item.icon} alt={item.name} />
-              <p>{item.name}</p>
-            </li>
-          ))}
+          {"children" in activeLocation
+            ? activeLocation?.children.map((item) => (
+                <li
+                  key={item.id}
+                  className={item.position}
+                  onClick={() => openItem(item)}
+                >
+                  <img src={item.icon} alt={item.name} />
+                  <p>{item.name}</p>
+                </li>
+              ))
+            : null}
         </ul>
       </div>
     </>
